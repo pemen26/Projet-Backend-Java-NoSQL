@@ -1,0 +1,22 @@
+services:
+  api:
+    build:
+      context: .
+    ports :
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres_vehicules
+      SPRING_DATASOURCE_USERNAME: postgres_user
+      SPRING_DATASOURCE_PASSWORD: postgres_pwd
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_pwd
+      POSTGRES_DB: postgres_vehicules
+    ports:
+      - "5432:5432"
